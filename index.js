@@ -1,5 +1,22 @@
 'use strict';
 
+const createListItem = (itemToAdd) => {
+	return `
+		<li>
+			<span class="shopping-item">${itemToAdd}</span>
+			<div class="shopping-item-controls">
+				<button class="shopping-item-toggle">
+					<span class="button-label">check</span>
+				</button> 
+				<button class="shopping-item-delete">
+					<span class="button-label">delete</span>
+				</button>
+			</div>
+		</li>
+	`;
+};
+
+
 $(function() {
 
   $('#js-shopping-list-form').submit(event => {
@@ -7,7 +24,7 @@ $(function() {
 
     const $input = $('#shopping-list-entry'),
     	itemToAdd = $input.val(),
-    	listItem = `<li><span class="shopping-item">${itemToAdd}</span><div class="shopping-item-controls"><button class="shopping-item-toggle"><span class="button-label">check</span></button> <button class="shopping-item-delete"><span class="button-label">delete</span></button></div></li>`;
+    	listItem = createListItem(itemToAdd);
  
     $(".shopping-list").append(listItem);
     $input.val('');
@@ -19,7 +36,6 @@ $(function() {
   });
 
   $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
-		console.log($(this).closest('li').find('.shopping-item'));
 		$(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
 	});
   
